@@ -55,7 +55,7 @@ def succesionFubinachiIterativa(numeroOrden):
         return numeroOrden
     fib_0 = 0
     fib_1 = 1
-    aux = 0
+    aux = 0001
     while (numeroOrden > 0 ) :
         aux = fib_0 + fib_1
         fib_0 = fib_1
