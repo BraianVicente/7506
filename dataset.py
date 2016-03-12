@@ -25,8 +25,8 @@
 
 import sys
 LECTURA = 'r'
-TEST = "input/test.csv"
-TRAIN = "input/train.csv"
+TEST = "test.csv"
+TRAIN = "train.csv"
 
 def cargarArchivo(entrada) :
     try:
@@ -53,7 +53,7 @@ def conocerCantidadSetDeDatosTrain():
 def main():
     conocerCantidadSetDeDatosTest()
     conocerCantidadSetDeDatosTrain()
-    print "marcos puto"
+
 
 if __name__ == '__main__':
     main()
