@@ -45,10 +45,24 @@ def conocerCantidadSetDeDatos(entrada):
     archivo.close()
     return 0
 
+def contarYMostrarClases(entrada):
+    
+    conjunto = set()
+    archivo = cargarArchivo(entrada)
+    linea = archivo.readline()
+    for linea in archivo:
+        conjunto.add(linea[0])
+        
+        
+    conjunto = sorted(conjunto)
+    print len(conjunto)
+    print conjunto
+    archivo.close()
 
 def main():
     conocerCantidadSetDeDatos(TEST)
     conocerCantidadSetDeDatos(TRAIN)
+    contarYMostrarClases(TRAIN)
     
     
 
