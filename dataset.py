@@ -73,28 +73,41 @@ def contarImagenesPorClase(entrada):
 def contarCantidadPixel(entrada,cantidad) :
     cantidadZeros = [0,0,0,0,0,0,0,0,0,0]
     mayorCantidadZeros = [0,0,0,0,0,0,0,0,0,0]
-    menorCantidadZeros = [0,0,0,0,0,0,0,0,0,0]
+    menorCantidadZeros = [255,255,255,255,255,255,255,255,255,255]
     archivo = cargarArchivo(entrada)
     archivo.readline()
     
     for linea in archivo :
         cadena = ""
+        cantidadActualCero = 0
         for caracter in linea :
-            if caracter != ',':
-                cadena = cadena + caracter
-            else :
-                if 0 == int(cadena) :
-                    cantidadZeros[int(linea[0])] = cantidadZeros[int(linea[0])] + 1
-                cadena = ""
-   
+            if caracter != '\0' :
+            
+                if caracter != ',':
+                    cadena = cadena + caracter
+                else :
+                    if 0 == int(cadena) :
+                        cantidadZeros[int(linea[0])] = cantidadZeros[int(linea[0])] + 1
+                        cantidadActualCero = cantidadActualCero + 1 
+                                                
+                    cadena = ""
+                    cantidadActualCero = 0
+        if mayorCantidadZeros[int(linea[0])] < cantidadActualCero :
+            mayorCantidadZeros[int(linea[0])] = cantidadActualCero
+        if menorCantidadZeros[int(linea[0])] > cantidadActualCero :
+            menorCantidadZeros[int(linea[0])] = cantidadActualCero
+
+       
     print cantidadZeros
+    print mayorCantidadZeros
+    print menorCantidadZeros
     
          
         
 def main():
-    conocerCantidadSetDeDatos(TEST)
-    conocerCantidadSetDeDatos(TRAIN)
-    contarYMostrarClases(TRAIN)
+#    conocerCantidadSetDeDatos(TEST)
+#    conocerCantidadSetDeDatos(TRAIN)
+#    contarYMostrarClases(TRAIN)
     cantidad = contarImagenesPorClase(TRAIN)
     contarCantidadPixel(TRAIN,cantidad)
 main()
