@@ -53,7 +53,6 @@ def conocerCantidadSetDeDatosTrain():
 def main():
     conocerCantidadSetDeDatosTest()
     conocerCantidadSetDeDatosTrain()
-    print "prueba sin password"
 
 
 if __name__ == '__main__':
