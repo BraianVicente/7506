@@ -42,20 +42,15 @@ def conocerCantidadSetDeDatos(entrada):
     while archivo.readline() :
         indice = indice + 1
     print indice - 1
+    archivo.close()
     return 0
 
-def conocerCantidadSetDeDatosTest():
-    return conocerCantidadSetDeDatos(TEST)
-
-def conocerCantidadSetDeDatosTrain():
-    return conocerCantidadSetDeDatos(TRAIN)
 
 def main():
-    conocerCantidadSetDeDatosTest()
-    conocerCantidadSetDeDatosTrain()
+    conocerCantidadSetDeDatos(TEST)
+    conocerCantidadSetDeDatos(TRAIN)
+    
     
 
-
-if __name__ == '__main__':
-    main()
+main()
 
