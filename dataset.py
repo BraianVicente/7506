@@ -58,13 +58,44 @@ def contarYMostrarClases(entrada):
     print len(conjunto)
     print conjunto
     archivo.close()
+    
+def contarImagenesPorClase(entrada):
+    cantidadImagenes = [0,0,0,0,0,0,0,0,0,0]
+    archivo = cargarArchivo(entrada)
+    linea = archivo.readline()
+    for linea in archivo:
+        cantidadImagenes[int(linea[0])] = cantidadImagenes[int(linea[0])] + 1
+        
+    print cantidadImagenes
+    archivo.close()
+    return cantidadImagenes
 
+def contarCantidadPixel(entrada,cantidad) :
+    cantidadZeros = [0,0,0,0,0,0,0,0,0,0]
+    mayorCantidadZeros = [0,0,0,0,0,0,0,0,0,0]
+    menorCantidadZeros = [0,0,0,0,0,0,0,0,0,0]
+    archivo = cargarArchivo(entrada)
+    archivo.readline()
+    
+    for linea in archivo :
+        cadena = ""
+        for caracter in linea :
+            if caracter != ',':
+                cadena = cadena + caracter
+            else :
+                if 0 == int(cadena) :
+                    cantidadZeros[int(linea[0])] = cantidadZeros[int(linea[0])] + 1
+                cadena = ""
+   
+    print cantidadZeros
+    
+         
+        
 def main():
     conocerCantidadSetDeDatos(TEST)
     conocerCantidadSetDeDatos(TRAIN)
     contarYMostrarClases(TRAIN)
-    
-    
-
+    cantidad = contarImagenesPorClase(TRAIN)
+    contarCantidadPixel(TRAIN,cantidad)
 main()
 
