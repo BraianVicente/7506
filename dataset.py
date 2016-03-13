@@ -53,7 +53,7 @@ def conocerCantidadSetDeDatosTrain():
 def main():
     conocerCantidadSetDeDatosTest()
     conocerCantidadSetDeDatosTrain()
-
+print "juguemos un worms"
 
 if __name__ == '__main__':
     main()
