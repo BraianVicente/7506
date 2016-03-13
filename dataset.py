@@ -53,7 +53,7 @@ def conocerCantidadSetDeDatosTrain():
 def main():
     conocerCantidadSetDeDatosTest()
     conocerCantidadSetDeDatosTrain()
-
+    print "que onda"
 
 if __name__ == '__main__':
     main()
