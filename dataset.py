@@ -91,11 +91,11 @@ def contarCantidadPixel(entrada,cantidad) :
                         cantidadActualCero = cantidadActualCero + 1 
                                                 
                     cadena = ""
-                    cantidadActualCero = 0
         if mayorCantidadZeros[int(linea[0])] < cantidadActualCero :
             mayorCantidadZeros[int(linea[0])] = cantidadActualCero
         if menorCantidadZeros[int(linea[0])] > cantidadActualCero :
             menorCantidadZeros[int(linea[0])] = cantidadActualCero
+        cantidadActualCero = 0
 
        
     print cantidadZeros
