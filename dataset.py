@@ -53,8 +53,6 @@ def conocerCantidadSetDeDatosTrain():
 def main():
     conocerCantidadSetDeDatosTest()
     conocerCantidadSetDeDatosTrain()
-    print "age"
-    print "geany"
     
 
 
