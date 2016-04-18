@@ -30,12 +30,12 @@ import sys
 
 def trainFileReader():
 	print "reading training file.."
-	with open('Documentos/Finger1/input/trainPlus.csv', 'r') as trainFile :
+	with open('../input/train.csv', 'r') as trainFile :
 		trainReader = csv.reader(trainFile, delimiter=',', quotechar='"')
 		trainFile.next()
 
 		trainData = []
-		trainTarget = np.zeros(68870)
+		trainTarget = np.zeros(42000)
 		j = 0
 		print "recognize file data.."
 
@@ -53,7 +53,7 @@ def trainFileReader():
 def testFileReader():
 
 	print "starting test file reading.."
-	with open('Documentos/Finger1/input/test.csv', 'r') as testFile :
+	with open('../input/test.csv', 'r') as testFile :
 		testReader = csv.reader(testFile, delimiter=',', quotechar='"')
 		testFile.next()
 		testData = []
@@ -71,7 +71,7 @@ def testFileReader():
 def digitRecognizeKaggleWhitKNeigbours(kNeigbours,saveFileName):
 	digitRecognizeKaggle(saveFileName,neighbors.KNeighborsClassifier(n_neighbors=kNeigbours))
 
-def digitRecognizeKaggle(saveFileName='trainPlusDefault',kNeigboursClassifier=neighbors.KNeighborsClassifier()):
+def digitRecognizeKaggle(saveFileName='predictionKNN',kNeigboursClassifier=neighbors.KNeighborsClassifier()):
 	trainFileData = trainFileReader()
 	trainData = trainFileData[0]
 	trainTarget = trainFileData[1]
@@ -86,20 +86,20 @@ def digitRecognizeKaggle(saveFileName='trainPlusDefault',kNeigboursClassifier=ne
 	testData = testFileReader()
 
 	print "starting DigitRecognizing.."
-	predictionFile = open('Documentos/Finger1/input/'+saveFileName+'.csv','w')
+	predictionFile = open('../output/'+saveFileName+'.csv','w')
 	#~ print knnDigitRecorgnize.predict([testData[0]])
 	#~ print str(knnDigitRecorgnize.predict([testData[0]])[0])
 	#~ print int(knnDigitRecorgnize.predict([testData[0]])[0])
-	print "File "+saveFileName+"at Documentos/Finger1/input/"
+	print "File "+saveFileName+" at ../output/"
 	i = 0
 	j = 2800
-	for row in testData :
-		predictionFile.write(str(int(knnDigitRecorgnize.predict([row])[0])) + '\n')
-		if (i%j == 0) :
-			print "DigitRecognize: %",float(i/280)
-		i+=1
+	#~ for row in testData :
+	predictionFile.write(str(int(knnDigitRecorgnize.predict(testData))) + '\n')
+		#~ if (i%j == 0) :
+			#~ print "DigitRecognize: %",float(i/280)
+		#~ i+=1
 
-	print "DataDigitRecognizing save at ",'Documentos/Finger1/input/'+saveFileName+'.csv'
+	print "DataDigitRecognizing save at ",'../output/'+saveFileName+'.csv'
 
 	print "DigitRecognizing done.."
 	predictionFile.close()
@@ -109,9 +109,9 @@ def digitRecognizeKaggle(saveFileName='trainPlusDefault',kNeigboursClassifier=ne
 	print "CSV Converting done.."
 
 def fileDigitRecognizeConvertToCVS(saveFileName):
-	predictionFile = open('Documentos/Finger1/input/'+saveFileName+'.csv','r')
+	predictionFile = open('./output/'+saveFileName+'.csv','r')
 
-	predictionFileCVS = open('Documentos/Finger1/input/'+saveFileName+'knn.csv','w')
+	predictionFileCVS = open('../output/'+saveFileName+'knn.csv','w')
 
 	predictionFileCVS.write('"ImageId","Label"\n')
 
