@@ -71,7 +71,7 @@ def testFileReader():
 def digitRecognizeKaggleWhitKNeigbours(kNeigbours,saveFileName):
 	digitRecognizeKaggle(saveFileName,neighbors.KNeighborsClassifier(n_neighbors=kNeigbours))
 
-def digitRecognizeKaggle(saveFileName='predictionKNN',kNeigboursClassifier=neighbors.KNeighborsClassifier()):
+def digitRecognizeKaggle(saveFileName='predictionKNNKDTree',kNeigboursClassifier=neighbors.KNeighborsClassifier(algorithm='kd_tree',n_jobs=-1)):
 	trainFileData = trainFileReader()
 	trainData = trainFileData[0]
 	trainTarget = trainFileData[1]
@@ -93,11 +93,10 @@ def digitRecognizeKaggle(saveFileName='predictionKNN',kNeigboursClassifier=neigh
 	print "File "+saveFileName+" at ../output/"
 	i = 0
 	j = 2800
-	#~ for row in testData :
-	predictionFile.write(str(int(knnDigitRecorgnize.predict(testData))) + '\n')
-		#~ if (i%j == 0) :
-			#~ print "DigitRecognize: %",float(i/280)
-		#~ i+=1
+	predictionOutput = knnDigitRecorgnize.predict(testData)
+	for row in predictionOutput :
+		predictionFile.write(str(int(row)) + '\n')
+
 
 	print "DataDigitRecognizing save at ",'../output/'+saveFileName+'.csv'
 
