@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  sys.py
+#  datamerge.py
 #
 #  Copyright 2016 Braian Hernán Vicente <brahvic@Lenovo-G580>
 #
