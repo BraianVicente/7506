@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-#  finger2.py
+#  kNearestNeigborns.py
 #
 #  Copyright 2016 Braian Hernán Vicente <brahvic@Lenovo-G580>
 #
