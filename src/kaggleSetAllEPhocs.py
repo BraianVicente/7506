@@ -2,7 +2,7 @@
 
 import numpy as np
 
-from BackPropagationNN import NeuralNetwork
+from BackPropagationNNAllEphocs import NeuralNetwork
 
 from sklearn import datasets
 from sklearn import preprocessing
