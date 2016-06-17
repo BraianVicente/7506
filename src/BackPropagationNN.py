@@ -1,5 +1,6 @@
 import numpy as np
 import time
+from sklearn import metrics
 
 class NeuralNetwork(object):
 
@@ -15,6 +16,9 @@ class NeuralNetwork(object):
 		elif activation == 'linear':
 			self.activation = linear
 			self.activation_prime = linear_prime
+		elif activation == 'relu':
+			self.activation = relu
+			self.activation_prime = relu_prime
 
 		# Output layer activation function
 		if output_act == 'sigmoid':
@@ -39,17 +43,30 @@ class NeuralNetwork(object):
 		self.updateo = 0
 
 
-	def feedforward(self, X):
+	def feedforward(self, X, i):
 
 		# Hidden layer activation
+#		if i==0:
+#			print 'pesos iniciales (784x50):'	
+#			print self.wi
+#			print 'imagen x pesos (50x1):'
+#			print (np.dot(X, self.wi))
 		ah = self.activation(np.dot(X, self.wi))
-
+#		if i==0:
+#			print 'resultado dsp tanh:'
+#			print ah
 		# Adding bias to the hidden layer results
 		ah = np.concatenate((np.ones(1).T, np.array(ah)))
-
+#		if i==0:
+#			print '1 concatenado:'
+#			print ah
+#			print 'ah x pesos salidas:'
+#			print (np.dot(ah, self.wo))
 		# Outputs
 		y = self.output_act(np.dot(ah, self.wo))
-
+#		if i==0:
+#			print 'salida'
+#			print y
 		# Return the results
 		return y
 
@@ -64,10 +81,11 @@ class NeuralNetwork(object):
 
 			# Dataset loop
 			for i in range(X.shape[0]):
+				
 
 				# Hidden layer activation
 				ah = self.activation(np.dot(X[i], self.wi))
-
+				
 				# Adding bias to the hidden layer
 				ah = np.concatenate((np.ones(1).T, np.array(ah)))
 
@@ -89,7 +107,6 @@ class NeuralNetwork(object):
 			# Print training status
 			if verbose == 1:
 				print 'EPOCH: {0:4d}/{1:4d}\t\tLearning rate: {2:4f}\t\tElapse time [seconds]: {3:5f}'.format(k,epochs,learning_rate, time.time() - startTime)
-
 			# Learning rate update
 			learning_rate = learning_rate * (1 - learning_rate_decay)
 
@@ -101,8 +118,8 @@ class NeuralNetwork(object):
 		# Loop the inputs
 		for i in range(0,X.shape[0]):
 
-			y[i] = self.feedforward(X[i])
-
+			y[i] = self.feedforward(X[i],i)
+		#print y
 		# Return the results
 		return y
 
@@ -125,6 +142,12 @@ def softmax(x):
 
 def softmax_prime(x):
     return softmax(x)*(1.0-softmax(x))
+   
+def relu(x):
+	return (np.log(1+np.exp(np.array(x))))
+
+def relu_prime(x):
+	return (np.exp(np.array(x)) / (1 + (np.exp(np.array(x)))))
 
 def linear(x):
 	return x

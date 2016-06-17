@@ -16,6 +16,10 @@ class NeuralNetwork(object):
 		elif activation == 'linear':
 			self.activation = linear
 			self.activation_prime = linear_prime
+		elif activation == 'relu':
+			self.activation = relu
+			self.activation_prime = relu_prime
+			
 
 		# Output layer activation function
 		if output_act == 'sigmoid':
@@ -136,6 +140,12 @@ def softmax(x):
 
 def softmax_prime(x):
     return softmax(x)*(1.0-softmax(x))
+
+def relu(x):
+	return (np.log(1+np.exp(np.array(x))))
+
+def relu_prime(x):
+	return (np.exp(np.array(x)) / (1 + (np.exp(np.array(x)))))
 
 def linear(x):
 	return x

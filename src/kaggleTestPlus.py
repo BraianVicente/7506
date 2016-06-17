@@ -11,7 +11,7 @@ from sklearn import metrics
 import csv
 from numpy.numarray.session import SAVEFILE
 
-SIZE_OF_TRAIN = 68870
+SIZE_OF_TRAIN = 68322
 SIZE_OF_TEST = 28000
 DIMESION_OF_INPUT = 28*28
 
@@ -20,7 +20,7 @@ DIMESION_OF_INPUT = 28*28
 
 def trainFileReader():
 	print "reading training file.."
-	with open('../input/trainPlus.csv', 'r') as trainFile :
+	with open('../input/trainEx.csv', 'r') as trainFile :
 		trainReader = csv.reader(trainFile, delimiter=',', quotechar='"')
 		trainFile.next()
 
@@ -55,7 +55,7 @@ def testFileReader():
 			for i in range(28*28) :
 				matrix[i] = row[i]
 			testData[valor] = matrix
-	
+		
 #	testData = np.genfromtxt('../input/test.csv',delimiter=',',dtype='int8',skip_header=1)
 	print "recognizing test data done.."
 
@@ -74,10 +74,13 @@ def main():
 	# digits = datasets.load_digits()
 	X_raw, y_raw = trainFileReader()
 	W_raw = testFileReader()
+#	print 'imagen original:'
+#	print W_raw[0]
 	X = preprocessing.scale(X_raw.astype(float))
 	y = targetToVector(y_raw)
 	W = preprocessing.scale(W_raw.astype(float))
-
+#	print 'imagen scale'
+#	print W[0]
 	# Cross valitation
 	#X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.02, random_state=0)
 	X_train = X
@@ -86,7 +89,7 @@ def main():
 	
 	
 	# Neural Network initialization
-	NN = NeuralNetwork(DIMESION_OF_INPUT,28*10,10,activation='linear',output_act = 'softmax')
+	NN = NeuralNetwork(DIMESION_OF_INPUT,280,10,activation='tanh',output_act = 'softmax')
 	NN.fit(X_train,y_train, epochs = 10, learning_rate = .002, learning_rate_decay = .0002, verbose = 1)
 
 	# NN predictions
@@ -99,7 +102,7 @@ def main():
 
 	# Metrics
 	y_predicted = np.argmax(y_predicted, axis=1).astype(int)
-	print y_predicted
+#	print y_predicted
 	# y_test = np.argmax(y_test, axis=1).astype(int)
 	"""
 	print("\nClassification report for classifier:\n\n%s\n"
@@ -108,7 +111,7 @@ def main():
 	"""
 	print 'prueba ok'
 	
-	saveFileName = 'NNPlus'
+	saveFileName = 'NNPlusRelu'
 	
 	predictionFile = open('../output/'+saveFileName+'.csv','w')
 
