@@ -57,7 +57,7 @@ def main():
 	X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.1, random_state=0)
 
 	# Neural Network initialization
-	NN = NeuralNetwork(DIMESION_OF_INPUT,28*10,10,activation='relu', output_act = 'softmax')
+	NN = NeuralNetwork(DIMESION_OF_INPUT,28*10,10,activation='tanh', output_act = 'softmax')
 	NN.fit(X_train,y_train, X_test,y_test, epochs = 10, learning_rate = .001, learning_rate_decay = .0001, verbose = 1)
 
 	# NN predictions
